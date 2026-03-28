@@ -1298,7 +1298,10 @@ class DictPosition(ContraDict):
 
 
     def to_viewport(self, scale=1):
-        return self._position.to_viewport(scale)
+        return cdp.page.Viewport(
+            x=self.x, y=self.y, width=self.width, height=self.height, scale=scale
+        )
+
 
     def __repr__(self):
         return str(self.to_dict())
