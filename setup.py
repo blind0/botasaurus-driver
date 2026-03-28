@@ -53,4 +53,7 @@ setup(
     },
     packages=find_packages(include=["botasaurus_driver", "botasaurus_driver.*"]),
     include_package_data=True,
+    package_data={
+        "botasaurus_driver": ["core/*", "cdp/*"],
+    },
 )
