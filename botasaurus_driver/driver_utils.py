@@ -1,20 +1,23 @@
 import json
 import os
+import threading
 from time import sleep
 
 from .exceptions import DriverException, GoogleCookieConsentException
 
-
+_file_lock = threading.RLock()
 
 def read_json(path):
-    with open(path, 'r', encoding="utf-8") as fp:
-        data = json.load(fp)
-        return data
+    with _file_lock:
+        with open(path, 'r', encoding="utf-8") as fp:
+            data = json.load(fp)
+            return data
 
         
 def write_json(data, path,  indent=4):
-    with open(path, 'w', encoding="utf-8") as fp:
-        json.dump(data, fp, indent=indent)    
+    with _file_lock:
+        with open(path, 'w', encoding="utf-8") as fp:
+            json.dump(data, fp, indent=indent)    
 
 def sleep_forever():
     print("Sleeping Forever")
