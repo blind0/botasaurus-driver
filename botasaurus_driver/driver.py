@@ -2113,6 +2113,15 @@ class Driver(BrowserTab):
 
         super().__init__(self.config, self._tab_value,  None, self, self._browser)
 
+    @property
+    def check_exist(self):
+        if self._browser.stopped:
+            return False
+        return True
+
+    def restart(self,):
+        self._browser = start(self.config)
+        load_cookies(self, self.config.profile)
 
     def _make_element(self, elem):
         return make_element(self._driver, self._tab, self, elem)
